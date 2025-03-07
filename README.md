@@ -12,6 +12,14 @@ Documents about ldd, or linux kernel or background knowledges.
  - A Dive Into Kbuild:  
 [Kbuild system](https://events19.linuxfoundation.org/wp-content/uploads/2017/11/A-Dive-into-Kbuild-Cao-Jin-Fujitsu.pdf)
 
+ - USB
+ [USB Debugging Tips](https://elinux.org/images/1/17/USB_Debugging_and_Profiling_Techniques.pdf)
+
+ - Device Tree
+[Device Tree Usage](https://elinux.org/Device_Tree_Usage)
+
+
 
 ## Embedded systems
 yocto or device protocol or init framework..
+
