@@ -34,6 +34,7 @@ timer, hrtimer에 대한 전반적인 개념 이해
 [](https://velog.io/@quine/%ED%83%80%EC%9D%B4%EB%A8%B8-%EB%93%9C%EB%9D%BC%EC%9D%B4%EB%B2%84timer-hrtimer)
 hrtimer 관련 자료  
 [](https://stackoverflow.com/questions/54777424/using-hrtimers-in-the-linux-kernel)
+[](https://docs.kernel.org/timers/hrtimers.html)
 timer 관련 자료  
 [](https://embetronicx.com/tutorials/linux/device-drivers/using-high-resolution-timer-in-linux-device-driver/)
   
