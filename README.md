@@ -1,19 +1,19 @@
 # dev log
 
 ## ldd
- - LDD documents
+ - LDD documents  
 [ldd docs](./ldd/ldd_docs.md)
 
  - work
-implementations, examples, documents.  
+implementations, examples, documents.   
 [work](./ldd/work.md)
   
 ## u-boot
-documents or work history
+documents or work history  
 [docs](./u-boot/work.md)
 
 ## yocto
-documents
+documents  
 [docs](./yocto/docs.md)
 
 
