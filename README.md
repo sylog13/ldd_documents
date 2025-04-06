@@ -18,7 +18,7 @@ Documents about ldd, or linux kernel or background knowledges.
  - Device Tree
 [Device Tree Usage](https://elinux.org/Device_Tree_Usage)
 
- - timer, hrtimer
+ - timer, hrtimer  
 최근 SPI를 사용하는 장치를 브링업하면서 슬레이브 장치에서 지원하는 SPI frame format이 표준을 따르지 않아서 직접 GPIO로 SPI 파형을 만드는 App을 구현했었다.
 msec단위로 sleep을 하게되서 성능상 좋지 않은 점도 있고 KHz까지만 구현이 가능하다는 단점도 있어서 성능 개선 작업을 구상하고 있다.
 Application runtime에 빈번하게 SPI통신을 해야하는데, 멀티 스레딩 환경에서는 스케줄링에 의해 영향을 받을 수도 있다는 점도 있다.  
