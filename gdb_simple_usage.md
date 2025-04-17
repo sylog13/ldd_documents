@@ -50,9 +50,28 @@ do_install:append() {
         bbplain "======== ${PN}: do_install()[-] =========="
 }
 
+#########################################################
+# FIXME: To use GDB. Remove in product version. 
+# ERROR: my-app-0.1-r0 do_package_qa: QA Issue: my-app-src: non debug package contains .debug directory 
+#       /usr/src/debug/my-app/0.1/app/.debug/msin [debug-files]
+# https://stackoverflow.com/questions/20604594/error-non-debug-package-contains-debug-directory-with-yocto-recipe
+# 
+# INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+# INHIBIT_PACKAGE_STRIP = "1"
+# 
+# https://docs.yoctoproject.org/3.3/ref-manual/qa-checks.html
+# non debug package contains .debug directory: <packagename> path <path> [debug-files]
+# The specified package contains a .debug directory, which should not appear in anything but the -dbg package. 
+#   This situation might occur if you add a path which contains a .debug directory and 
+#    do not explicitly add the .debug directory to the -dbg package. 
+#   If this is the case, add the .debug directory explicitly to FILES_${PN}-dbg. 
+#   See FILES for additional information on FILES.
 FILES:${PN}-dbg += "/usr/src/debug/my-app/0.1/app"
 FILES:${PN}-dbg += "/usr/src/debug/my-app/0.1/app/.debug"
 ~~~
+이 패키지에서 디버그용 패키지 파일들을 추가해주고  
+패키지(PACKAGES variable)도 디버그용으로 추가해줬다.  
+my-app-dbg를 my-image.bb에서 추가해주면 rootfs에 추가된다.  
   
 Makefile
   -g플래그를 추가해준다.  
