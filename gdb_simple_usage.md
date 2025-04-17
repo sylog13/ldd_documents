@@ -2,11 +2,71 @@
 협력사 라이브러리를 gdb로 디버깅하다가..  
 매번 gdb사용할 때마다 구글링해서 찾아봐서  
 이번 기회에 간단한 디버깅 방법을 정리해둔다.  
-## yocto에 gdb 추가
-https://linux-dev.gitbook.io/linux-os-build-.../installing-gdb-in-yocto-project
+## rootfs(yocto)에 gdb 추가
+[https://docs.yoctoproject.org/dev-manual/debugging.html](https://docs.yoctoproject.org/dev-manual/debugging.html)
+my-image.bb  
 ~~~bash
-#add the feature :-> tools-debug
-EXTRA_IMAGE_FEATURES += "debug-tweaks tools-debug"
+################################################################################
+# To debug apps using GDB.
+# https://docs.yoctoproject.org/dev-manual/debugging.html
+# To support this kind of debugging, you need do the following:
+##  - Ensure that GDB is on the target. You can do this by making the following addition to your local.conf file:
+# EXTRA_IMAGE_FEATURES:append = " tools-debug"
+##  - Ensure that debug symbols are present. You can do so by adding the corresponding -dbg package to IMAGE_INSTALL:
+# IMAGE_INSTALL:append = " packagename-dbg"
+## Alternatively, you can add the following to local.conf to include all the debug symbols:
+# EXTRA_IMAGE_FEATURES:append = " dbg-pkgs"
+#
+# rootfs에 GDB를 추가한다
+EXTRA_IMAGE_FEATURES:append = " tools-debug"
+# 모든 패키지를 디버그용으로 사용한다.
+# EXTRA_IMAGE_FEATURES += " dbg-pkgs"
+# my-app 패키지만 debug용으로 사용한다.
+IMAGE_INSTALL:append = " my-app-dbg"
+# DEBUG_BUILD = "1"
+~~~
+### my-app 패키지를 디버그용으로 빌드
+my-app.bb
+~~~bash
+#########################################################
+# FIXME: To use GDB. Remove in product version. 
+INHIBIT_PACKAGE_STRIP = "1"
+INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+PACKAGES = "${PN}-dbg"
+#########################################################
+
+do_install:append() {
+        #########################################################
+        # FIXME: To use GDB. Remove in product version. 
+        bbplain "======== ${PN}: do_install() debug resource =========="
+        # FIXME: To use GDB. Remove in product version. 
+        install -d ${D}/usr/src/debug/my-app/0.1/app
+        cp -r app/* ${D}/usr/src/debug/my-app/0.1/app
+        #
+        # install -d      ${D}${datadir}
+        # cp -r app      ${D}${datadir}
+        bbplain "======== ${PN}: do_install() 3333 =========="
+        #########################################################
+        bbplain "======== ${PN}: do_install()[-] =========="
+}
+
+FILES:${PN}-dbg += "/usr/src/debug/my-app/0.1/app"
+FILES:${PN}-dbg += "/usr/src/debug/my-app/0.1/app/.debug"
+~~~
+  
+Makefile
+  -g플래그를 추가해준다.  
+~~~bash
+####################################################################
+# FIXME: Remove -g flag in product version. This flag is to use GDB.
+CFLAGS += -g
+####################################################################
+
+$(TARGET):$(OBJFILES)
+	$(CC) ${LDFLAGS} $(CSTDFLAG) -o $@ $^ -lm
+
+$(OBJDIR)/%.o:%.c
+	$(CC) ${LDFLAGS} $(CSTDFLAG) $(CFLAGS) $(IFLAGS) -o $@ -c $<
 ~~~
 
 ## 별도의 파일에 breakpoint 거는 방법
