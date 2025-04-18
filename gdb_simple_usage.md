@@ -88,6 +88,44 @@ $(OBJDIR)/%.o:%.c
 	$(CC) ${LDFLAGS} $(CSTDFLAG) $(CFLAGS) $(IFLAGS) -o $@ -c $<
 ~~~
 
+## How to reduce rootfs size
+타겟보드는 NOR Flash를 사용 중이어서 용량이 간당간당하다.  
+디버깅용으로 빌드하면서 더 용량이 부족해졌다.  
+NAND나 EMMC를 사용하면 좋으련만... 소통이 안되는 윗사람들..  
+용량을 줄이려면 아래처럼 하면 된다.  
+[distro feature](https://yocto.yoctoproject.narkive.com/zQ11Cl29/best-way-to-remove-distro-features)
+[distro feature 2](https://docs.yoctoproject.org/pipermail/yocto/2017-August/037349.html)
+my-app.bb
+~~~bash
+IMAGE_INSTALL:remove = " nfs-utils \
+						nfs-utils-client \ 
+						openssh  \
+						nfs-server \
+						nfs-client \
+						acl alsa bluetooth debuginfod pv4 ipv6 pcmcia usbgadget usbhost \
+						wifi xattr nfs zeroconf pci 3g 3g \
+						opengl \
+						wayland \
+						x11 \
+						nfc \
+						nfs \
+						ext2 \
+						wifi \
+						nfs \
+						pci \
+						wayland \
+						x11 vfat seccomp opengl ptest multiarch wayland vulkan \
+						usrmerge sysvinit pulseaudio gobject-introspection-data "
+DISTRO_FEATURES:append = " systemd usrmerge "
+PACKAGE_EXCLUDE = " packagegroup-core-nfs-server \
+					packagegroup-core-nfs-client \
+					packagegroup-core-ssh-dropbear \
+ 					packagegroup-core-ssh-openssh \
+					packagegroup-base-extended "
+
+~~~
+
+
 ## 별도의 파일에 breakpoint 거는 방법
 https://www.google.com/search?q=how+to+add+breakpoint+in+specific+file+in+gdb&oq=how+to+add+breakpoint+in+specific+file+in+gdb&gs_lcrp=EgZjaHJvbWUyCQgAEEUYORigATIHCAEQIRigATIHCAIQIRigATIHCAMQIRiPAjIHCAQQIRiPAtIBCTE0OTQ0ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8
   
