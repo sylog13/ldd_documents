@@ -175,7 +175,7 @@ To ignore a breakpoint until it has been crossed x times:"ignore [breakpointnumb
  type "print [variablename]". To set the value of a variable, type "set [variablename]=[valuetoset]".
 ~~~
 
-## 변수 값 보는 방법
+## 변수 값, breakpoint, args 보는 방법
 https://cgi.cse.unsw.edu.au/~learn/debugging/modules/gdb_viewing_data/
 ### print
 View simple data including strings, integers, structs, or a statically declared arrays (1D or 2D).
@@ -192,6 +192,25 @@ Print the arguments passed into the function.
 ~~~
 (gdb) info args
 ~~~
+
+### info break
+Print all breakpint
+~~~
+(gdb) info break
+~~~
+
+### info args
+Print all function args
+~~~
+(gdb) info args
+~~~
+
+### delete break
+delete breakpoint 3
+~~~
+(gdb) del 3
+~~~
+
 
 ## 컴파일 & 실행
 sy@sy-desktop:~/check/agilex5_res$ gcc -g check_gdb.c -o check_gdb
