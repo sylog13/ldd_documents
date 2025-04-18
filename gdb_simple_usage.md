@@ -40,8 +40,8 @@ do_install() {
         # FIXME: To use GDB. Remove in product version. 
         bbplain "======== ${PN}: do_install() debug resource =========="
         # FIXME: To use GDB. Remove in product version. 
-        install -d ${D}/usr/src/debug/my-app/0.1/app
-        cp -r app/* ${D}/usr/src/debug/my-app/0.1/app
+        install -d ${D}${TARGET_DBGSRC_DIR}/app
+        cp -r app/* ${D}${TARGET_DBGSRC_DIR}/app
         #
         # install -d      ${D}${datadir}
         # cp -r app      ${D}${datadir}
@@ -66,8 +66,7 @@ do_install() {
 #    do not explicitly add the .debug directory to the -dbg package. 
 #   If this is the case, add the .debug directory explicitly to FILES_${PN}-dbg. 
 #   See FILES for additional information on FILES.
-FILES:${PN}-dbg += "/usr/src/debug/my-app/0.1/app"
-FILES:${PN}-dbg += "/usr/src/debug/my-app/0.1/app/.debug"
+FILES:${PN}-dbg += "${TARGET_DBGSRC_DIR}/app"
 ~~~
 이 패키지에서 디버그용 패키지 파일들을 추가해주고  
 패키지(PACKAGES variable)도 디버그용으로 추가해줬다.  
