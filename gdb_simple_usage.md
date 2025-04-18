@@ -207,7 +207,7 @@ Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
 Breakpoint 1, main () at check_gdb.c:10
 ~~~
 
-## 다음 브레이크 포인트 이동, 브레이크포인트 리스트 조회
+## 다음 라인 이동, 브레이크 포인트 이동, 브레이크포인트 리스트 조회
  - stepi vs nexti
 https://stackoverflow.com/questions/52024529/whats-the-difference-between-nexti-and-stepi-in-gdb
   
@@ -222,6 +222,8 @@ nexti는 다음 기계어로 이동한다.
   
 위에서 나온 것처럼 info break하면 브레이크포인트 리스트가 출력됨
 
+- continue
+다음 breakpoint로 이동한다.
 
 ## 체크용 코드
 ~~~
