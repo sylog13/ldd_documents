@@ -119,6 +119,7 @@ NAND나 EMMC를 사용하면 좋으련만... 소통이 안되는 윗사람들..
 용량을 줄이려면 아래처럼 하면 된다.  
 [distro feature](https://yocto.yoctoproject.narkive.com/zQ11Cl29/best-way-to-remove-distro-features)  
 [distro feature 2](https://docs.yoctoproject.org/pipermail/yocto/2017-August/037349.html)  
+[yocto-project-minimize-bsp](https://xterra2.avnet.com/nxp/mpu/imx-linux/-/blob/aa5facb050f08b2bdf2d74187c7c8812df38746a/yocto-project-minimize-bsp.md)  
 my-app.bb  
 ~~~bash
 IMAGE_INSTALL:remove = " nfs-utils \
