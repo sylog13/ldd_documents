@@ -89,13 +89,13 @@ $(OBJDIR)/%.o:%.c
 ~~~
 
 ### 소스를 rootfs에 추가
-디버깅을 하려면 타겟보드 내에 코드가 있어야 한다.
-타겟보드를 gdb-server로 동작시켜서 사용할 수 있으나,
-네트워크 관련 하드웨어가 지원되지 않는 상태여서 타겟보드에서 디버깅을 해야한다.
+디버깅을 하려면 타겟보드 내에 코드가 있어야 한다.  
+타겟보드를 gdb-server로 동작시켜서 사용할 수 있으나,  
+네트워크 관련 하드웨어가 지원되지 않는 상태여서 타겟보드에서 디버깅을 해야한다.  
 (gdb my_app 이렇게 실행하고 breakpoint를 설정하면 파일이 없다는 에러가 출력된다.)
-소스를 rootfs에 추가하기 위해서는 ${PN}-src에 소스 디렉토리를 추가해주고
-이미지 레시피에서는 ${PN}-src(my-app-src)를 추가해주면 된다.
-[${PN}-src](https://stackoverflow.com/questions/61085776/how-to-add-source-files-to-pn-src-package-in-yocto)
+소스를 rootfs에 추가하기 위해서는 '${PN}-src'에 소스 디렉토리를 추가해주고 
+이미지 레시피에서는 '${PN}-src(my-app-src)'를 추가해주면 된다.  
+[how to add to source to rootfs('${PN}-src')](https://stackoverflow.com/questions/61085776/how-to-add-source-files-to-pn-src-package-in-yocto)  
 my-app.bb
 ~~~bash
 do_install()
@@ -117,9 +117,9 @@ IMAGE_INSTALL:append = hal-adc-src
 디버깅용으로 빌드하면서 더 용량이 부족해졌다.  
 NAND나 EMMC를 사용하면 좋으련만... 소통이 안되는 윗사람들..  
 용량을 줄이려면 아래처럼 하면 된다.  
-[distro feature](https://yocto.yoctoproject.narkive.com/zQ11Cl29/best-way-to-remove-distro-features)
-[distro feature 2](https://docs.yoctoproject.org/pipermail/yocto/2017-August/037349.html)
-my-app.bb
+[distro feature](https://yocto.yoctoproject.narkive.com/zQ11Cl29/best-way-to-remove-distro-features)  
+[distro feature 2](https://docs.yoctoproject.org/pipermail/yocto/2017-August/037349.html)  
+my-app.bb  
 ~~~bash
 IMAGE_INSTALL:remove = " nfs-utils \
 						nfs-utils-client \ 
