@@ -35,7 +35,7 @@ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 PACKAGES = "${PN}-dbg"
 #########################################################
 
-do_install:append() {
+do_install() {
         #########################################################
         # FIXME: To use GDB. Remove in product version. 
         bbplain "======== ${PN}: do_install() debug resource =========="
@@ -86,6 +86,30 @@ $(TARGET):$(OBJFILES)
 
 $(OBJDIR)/%.o:%.c
 	$(CC) ${LDFLAGS} $(CSTDFLAG) $(CFLAGS) $(IFLAGS) -o $@ -c $<
+~~~
+
+### 소스를 rootfs에 추가
+디버깅을 하려면 타겟보드 내에 코드가 있어야 한다.
+타겟보드를 gdb-server로 동작시켜서 사용할 수 있으나,
+네트워크 관련 하드웨어가 지원되지 않는 상태여서 타겟보드에서 디버깅을 해야한다.
+(gdb my_app 이렇게 실행하고 breakpoint를 설정하면 파일이 없다는 에러가 출력된다.)
+소스를 rootfs에 추가하기 위해서는 ${PN}-src에 소스 디렉토리를 추가해주고
+이미지 레시피에서는 ${PN}-src(my-app-src)를 추가해주면 된다.
+[${PN}-src](https://stackoverflow.com/questions/61085776/how-to-add-source-files-to-pn-src-package-in-yocto)
+my-app.bb
+~~~bash
+do_install()
+{
+        install -d ${D}${TARGET_DBGSRC_DIR}/CAFE
+        cp -r CAFE/* ${D}${TARGET_DBGSRC_DIR}/CAFE
+}
+
+FILES:${PN}-src += "${TARGET_DBGSRC_DIR}/CAFE"
+~~~
+
+my-image.bb
+~~~bash
+IMAGE_INSTALL:append = hal-adc-src
 ~~~
 
 ## How to reduce rootfs size
