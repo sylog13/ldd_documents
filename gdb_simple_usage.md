@@ -126,8 +126,8 @@ PACKAGE_EXCLUDE = " packagegroup-core-nfs-server \
 ~~~
 
 ## 구글링하다가 찾은 yocto관련 자료들
-[yocto 책](https://www.yes24.com/product/goods/124396411)
-[variable glossary 정리된 내용](https://won-u.github.io/posts/yocto-variable/)
+ - [yocto 책](https://www.yes24.com/product/goods/124396411)
+ - [variable glossary 정리된 내용](https://won-u.github.io/posts/yocto-variable/)
 
 
 ## 별도의 파일에 breakpoint 거는 방법
