@@ -222,7 +222,7 @@ nexti는 다음 기계어로 이동한다.
   
 위에서 나온 것처럼 info break하면 브레이크포인트 리스트가 출력됨
 
-- continue
+- continue  
 다음 breakpoint로 이동한다.
 
 ## 체크용 코드
