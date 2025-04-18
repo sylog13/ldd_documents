@@ -208,13 +208,13 @@ Breakpoint 1, main () at check_gdb.c:10
 ~~~
 
 ## 다음 라인 이동, 브레이크 포인트 이동, 브레이크포인트 리스트 조회
- - stepi vs nexti
+ - stepi vs nexti  
 https://stackoverflow.com/questions/52024529/whats-the-difference-between-nexti-and-stepi-in-gdb
   
 stepi가 조금 자세하다고 한다.  
 
 
- - nexti vs next
+ - nexti vs next  
 http://maths.nju.edu.cn/help/mathhpc/doc/intel/idb/common/idb_the_next_and_nexti_commands.htm
   
 next는 실행할 다음 줄에 함수 호출이 포함되어 있는 경우, 함수를 실행한다.  
